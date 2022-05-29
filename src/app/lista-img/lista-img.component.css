@@ -1,0 +1,10 @@
+.searchContainer{
+    width: 30%;
+    padding-bottom: 2%;
+    margin: auto;
+}
+.card{
+    margin-top: 5%;
+    float: right;
+    margin: 18px;
+}
