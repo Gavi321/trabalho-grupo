@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Img } from './lista-img/Img';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritosService{
 
-  favoritos = [];
+  favoritos: Array<Img>;
 
   constructor() {
-    this.favoritos = [];
+    this.favoritos = Array<Img>();
   }
 
   favoritar(obj: any): void{
@@ -17,7 +18,7 @@ export class FavoritosService{
 
     for(let i = 0; i < this.favoritos.length; i++)
     {
-      if(this.favoritos[i].id == obj.id)
+      if(this.favoritos[i].params.id == obj.params.id)
       {
         //se o id do index for = ao id do obj clicado na estrela flag = 1 (já existe)
         flag = 1;

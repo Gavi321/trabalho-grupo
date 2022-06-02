@@ -1,8 +1,8 @@
 export class Img{
     favorito: boolean;
-    params: [];
+    params: any;
 
-    constructor(favorito: boolean, params: []){
+    constructor(favorito: boolean, params: any){
         this.favorito = favorito;
         this.params = params;
     }

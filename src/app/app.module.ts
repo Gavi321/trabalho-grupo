@@ -39,7 +39,7 @@ const routes: Routes=[
     HttpClientModule,
     NgxPaginationModule
   ],
-  providers: [FavoritosComponent],
+  providers: [FavoritosComponent, ListaImgComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

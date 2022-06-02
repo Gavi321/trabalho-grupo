@@ -15,7 +15,6 @@ export class FavoritosComponent implements OnInit {
 
   favoritar(obj: any):void{
     this.favoritosService.favoritar(obj);
-    //console.log(this.favoritos)
   }
 
   desfavoritar(obj:any):void{

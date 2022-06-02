@@ -14,7 +14,6 @@ export class ListaImgComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   objs: Array<Img>;
-  //objs: any;
   p: number = 1;
   query_latest = "https://api.unsplash.com/photos?order_by=latest&per_page=24";
   query_search = "https://api.unsplash.com/search/photos?per_page=24&query=";
@@ -24,7 +23,6 @@ export class ListaImgComponent implements OnInit {
 
   constructor(private http: HttpClient, private favoritosComponent: FavoritosComponent, private favoritosService: FavoritosService) { 
     this.objs = Array<Img>();
-    //this.objs;
     this.latest_or_search = true;
     this.search_input = "";
   }
@@ -33,22 +31,23 @@ export class ListaImgComponent implements OnInit {
     this.latest_or_search = true;
     this.subscription = this.http.get(this.query_latest+this.cliente_id).subscribe(
       responseData => {
-        console.log(responseData);
-        
-        for(let i=0; i < 24;i++)
+
+        for(let i=0; i < 24; i++)
         {
+          this.objs.push(new Img(false, responseData[i]));
           for(let x=0; x < this.favoritosService.favoritos.length; x++)
           {
-            if(responseData[i] == this.favoritosService.favoritos[x])
-            {
-              this.objs.push(new Img(true, responseData[i]));
-            }
+              if(this.favoritosService.favoritos[x] != undefined && this.favoritosService.favoritos[x].params.id == responseData[i].id)
+              {
+                this.objs[i].favorito = true;
+              }
           }
         }
+        console.log(this.objs);
       }
     , error => {
       console.log(error);});
-  }
+  } 
 
   closeModal():void{
     var modal = document.getElementById("myModal");
@@ -60,14 +59,29 @@ export class ListaImgComponent implements OnInit {
     var modal = document.getElementById("myModal");
 
     this.latest_or_search = false;
-    this.subscription = this.http.get(this.query_search+this.search_input+this.cliente_id, {headers: new HttpHeaders({'Custom-Header': 'favorito'})}).subscribe(
+    this.subscription = this.http.get(this.query_search+this.search_input+this.cliente_id).subscribe(
       responseData => {
-      /*this.objs = responseData;
-      console.log(this.objs)
-      if(this.objs.total == 0)
+      let aux: any;
+      aux = responseData;
+
+      this.objs.splice(0);
+      
+      for(let i=0; i < 24; i++)
+      {
+        this.objs.push(new Img(false, aux.results[i]));
+        for(let x=0; x < this.favoritosService.favoritos.length; x++)
+        {
+            if(this.favoritosService.favoritos[x] != undefined && this.favoritosService.favoritos[x].params.id == aux.results[i].id)
+            {
+              this.objs[i].favorito = true;
+            }
+        }
+      }
+
+      if(this.objs.length == 0)
       {
         modal.style.display = "block";
-      }*/
+      }
     }
     , error => {
       console.log(error);});
@@ -86,6 +100,27 @@ export class ListaImgComponent implements OnInit {
     star.style.color = "yellow";
 
     this.favoritosComponent.favoritar(this.objs[i]);
+
+    if(this.objs.includes(this.objs[i]))
+    this.objs[i].favorito = true;
   }
 }
 
+/*
+
+for(let i=0; i < 24;i++)
+{
+  for(let x=0; x < this.favoritosService.favoritos.length+1; x++)
+  {
+    if(this.favoritosService.favoritos[x] == responseData[i])
+    {
+      //console.log("if");
+      this.objs[i].favorito = true;
+    }else{
+      //console.log("else");
+      this.objs.push(new Img(false, responseData[i]));
+    }
+  }
+}
+
+*/
