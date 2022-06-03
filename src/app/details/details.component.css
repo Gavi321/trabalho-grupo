@@ -1,0 +1,54 @@
+.container{
+    margin-top: 5%;
+    border: 1px solid;
+    display: inline-block;
+    /*opacity: 95%;*/
+}
+
+.img-container{
+    margin-left: -1%;
+    float: left;
+    border: 1px solid;
+}
+
+.info-container{
+    float: left;
+    /*border: 1px solid;*/
+    margin-top: 4%;
+    margin-left: 2%;
+}
+
+p{
+    margin-bottom: 1px;
+}
+
+.title{
+    /*border: 1px solid;*/
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.username{
+    /*border: 1px solid;*/
+    font-size: 20px;
+    font-weight: 600;
+    color: gray;
+    margin-bottom: 0px;
+}
+
+.created_at{
+    /*border: 1px solid;*/
+    font-size: 15px;
+    font-weight: 500;
+    color: darkgray;
+}
+
+.likes{
+    float:left;
+    margin-right: 15px;
+}
+
+.downloads{
+    float:left;
+}
