@@ -1,9 +1,0 @@
-<div class="card" *ngFor="let obj of favoritos; let i = index">
-    <img class="card-img-top" src="{{obj.params.urls.raw + '&fit=crop&w=250&h=200'}}">
-    <div class="card-body">
-        <p class="description" *ngIf="obj.params.description != null">{{obj.params.description}}</p>
-        <p class="description" *ngIf="obj.params.description == null">{{obj.params.alt_description}}</p>
-        <p class="created_at">{{obj.created_at}}</p>
-    </div>
-    <a class="btn btn-primary">Go somewhere</a>
-</div>
