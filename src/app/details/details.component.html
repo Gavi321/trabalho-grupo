@@ -1,6 +1,6 @@
 <div class="container">
     <div class="img-container">
-        <img src="{{this.img.params.urls.raw + '&fit=crop&w=500&h=550'}}">
+        <img src="{{this.img.params.urls.raw + '&fit=crop&w=480&h=500'}}">
     </div>
     <div class="info-container">
         <p class="title" *ngIf="this.img.params.description != null">{{this.img.params.description}}</p>
@@ -8,11 +8,17 @@
         <p class="title" *ngIf="this.img.params.alt_description == null && this.img.params.description == null">No title</p>
         <p class="username">by {{this.img.params.user.name}}</p>
         <p class="created_at">at {{this.imgCreated_at}}</p>
-        <div class="likes-container">
-            <p class="likes">Likes {{this.img.params.likes}}</p>
+        <div class="wrapper likes-container">
+            <p class="likes" *ngIf="this.img.params.likes != null">Likes: {{this.img.params.likes}}</p>
+            <p class="downloads" *ngIf="this.img.params.likes == null">Likes: 0</p>
         </div>
-        <div class="donwloads-container">
-            <p class="downloads">Downloads {{this.img.params.downloads}}</p>
+        <div class="wrapper downloads-container">
+            <p class="downloads" *ngIf="this.img.params.downloads != null">Downloads: {{this.img.params.downloads}}</p>
+            <p class="downloads" *ngIf="this.img.params.downloads == null">Downloads: 0</p>
+        </div>
+        <div class="category-container" *ngFor="let category of this.img.params.categories">
+            <p class="category">{{category}}</p>
         </div>
     </div>
 </div>
+

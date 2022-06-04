@@ -22,23 +22,35 @@ export class ListaImgComponent implements OnInit {
   cliente_id = "&client_id=dd4e1cb73ca3a1036d4e98d26f72a439141dc17039e1ae79b7bc2a23f3488578";
   latest_or_search: boolean;
   search_input: string;
+  imgCreated_at: string;
 
   constructor(private http: HttpClient, private favoritosComponent: FavoritosComponent, private favoritosService: FavoritosService, private detailsService: DetailsService) { 
     this.objs = Array<Img>();
     this.latest_or_search = true;
     this.search_input = "";
+    this.imgCreated_at = "";
   }
 
   load_latest(): void{
     this.latest_or_search = true;
     this.subscription = this.http.get(this.query_latest+this.cliente_id).subscribe(
       responseData => {
+      let aux = responseData;
 
         for(let i=0; i < 24; i++)
         {
           let newImg = new Img();
           newImg.favorito = false;
           newImg.params = responseData[i];
+
+          for(let y=0; y< 10; y++)
+          {
+            this.imgCreated_at = this.imgCreated_at + responseData[i].created_at.charAt(y);
+          }
+
+          newImg.params.created_at = this.imgCreated_at;
+          this.imgCreated_at = "";
+
           this.objs.push(newImg);
           for(let x=0; x < this.favoritosService.favoritos.length; x++)
           {

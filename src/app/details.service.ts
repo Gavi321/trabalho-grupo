@@ -9,12 +9,10 @@ import { ListaImgComponent } from './lista-img/lista-img.component';
 })
 export class DetailsService{
 
-  objs: Array<Img>;
   img: Img;
 
   constructor(private _Activatedroute:ActivatedRoute) {
     this.img = new Img();
-  }
-  
+  }  
 
 }
