@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Img } from './lista-img/Img';
 import { ListaImgComponent } from './lista-img/lista-img.component';
 
@@ -10,9 +8,21 @@ import { ListaImgComponent } from './lista-img/lista-img.component';
 export class DetailsService{
 
   img: Img;
+  objs: Array<Img>;
 
-  constructor(private _Activatedroute:ActivatedRoute) {
+  constructor() {
     this.img = new Img();
+    this.objs = Array<Img>();
   }  
+
+  details_img(id: any): void{
+    for(let i=0; i <= this.objs.length; i++)
+    {
+      if(this.objs[i].params.id == id)
+      {
+        this.img = this.objs[i];
+      }
+    }
+  }
 
 }

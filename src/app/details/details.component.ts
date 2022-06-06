@@ -15,7 +15,7 @@ export class DetailsComponent implements OnInit {
   img: Img;
   imgCreated_at: string;
 
-  constructor(private _Activatedroute:ActivatedRoute, detailsService: DetailsService) {
+  constructor(detailsService: DetailsService) {
     this.img = detailsService.img;
     this.imgCreated_at = "";
 
@@ -23,7 +23,6 @@ export class DetailsComponent implements OnInit {
     {
       this.imgCreated_at = this.imgCreated_at + this.img.params.created_at.charAt(i);
     }
-
    }
 
   ngOnInit(): void {

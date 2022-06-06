@@ -2,8 +2,9 @@
     <img class="card-img-top" src="{{obj.params.urls.raw + '&fit=crop&w=250&h=200'}}">
     <div class="card-body">
         <p class="description" *ngIf="obj.params.description != null">{{obj.params.description}}</p>
-        <p class="description" *ngIf="obj.params.description == null">{{obj.params.alt_description}}</p>
-        <p class="created_at">{{obj.created_at}}</p>
+        <p class="description" *ngIf="obj.params.alt_description != null">{{obj.params.alt_description}}</p>
+        <p class="description" *ngIf="this.obj.params.alt_description == null && this.obj.params.description == null">No title</p>
+        <p class="created_at">{{obj.params.created_at}}</p>
     </div>
-    <a class="btn btn-primary">Go somewhere</a>
+    <a class="btn btn-primary" routerLink="/details/{{obj.params.id}}" (click)="detailsService.details_img(obj.params.id)">Details</a>
 </div>

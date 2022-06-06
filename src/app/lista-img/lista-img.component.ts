@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { FavoritosComponent } from '../favoritos/favoritos.component';
 import { Img } from './Img';
 import { FavoritosService } from '../favoritos.service';
-import { DetailsComponent } from '../details/details.component';
 import { DetailsService } from '../details.service';
 
 @Component({
@@ -24,7 +23,7 @@ export class ListaImgComponent implements OnInit {
   search_input: string;
   imgCreated_at: string;
 
-  constructor(private http: HttpClient, private favoritosComponent: FavoritosComponent, private favoritosService: FavoritosService, private detailsService: DetailsService) { 
+  constructor(private http: HttpClient, private favoritosService: FavoritosService, public detailsService: DetailsService) { 
     this.objs = Array<Img>();
     this.latest_or_search = true;
     this.search_input = "";
@@ -35,7 +34,6 @@ export class ListaImgComponent implements OnInit {
     this.latest_or_search = true;
     this.subscription = this.http.get(this.query_latest+this.cliente_id).subscribe(
       responseData => {
-      let aux = responseData;
 
         for(let i=0; i < 24; i++)
         {
@@ -60,15 +58,15 @@ export class ListaImgComponent implements OnInit {
               }
           }
         }
-        console.log(this.objs);
+        this.detailsService.objs = this.objs;
       }
       
     , error => {
       console.log(error);});
   } 
 
-  details_img(img: Img){
-    this.detailsService.img = img;
+  details_img(id: any){
+    this.detailsService.details_img(id);
   }
 
   closeModal():void{
@@ -108,6 +106,8 @@ export class ListaImgComponent implements OnInit {
       {
         modal.style.display = "block";
       }
+
+      this.detailsService.objs = this.objs;
     }
     , error => {
       console.log(error);});
@@ -121,13 +121,16 @@ export class ListaImgComponent implements OnInit {
     this.load_latest();
   }
 
-  favoritar(i: number): void{
-    var star = document.getElementById(i.toString());
-    star.style.color = "yellow";
+  favoritar(id: number): void{
+    var star = document.getElementById(id.toString());
 
-    this.favoritosComponent.favoritar(this.objs[i]);
-
-    if(this.objs.includes(this.objs[i]))
-    this.objs[i].favorito = true;
+    for(let i=0; i <= this.objs.length; i++)
+    {
+      if(this.objs[i].params.id == id)
+      {
+        if(this.objs.includes(this.objs[i]))
+        this.favoritosService.favoritar(this.objs[i], star);
+      }
+    }
   }
 }

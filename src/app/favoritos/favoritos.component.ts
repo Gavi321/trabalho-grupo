@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DetailsService } from '../details.service';
+import { DetailsComponent } from '../details/details.component';
 import { FavoritosService } from '../favoritos.service';
+import { ListaImgComponent } from '../lista-img/lista-img.component';
 
 @Component({
   selector: 'app-favoritos',
@@ -9,17 +12,9 @@ import { FavoritosService } from '../favoritos.service';
 export class FavoritosComponent implements OnInit {
   favoritos: any;
 
-  constructor(private favoritosService: FavoritosService) {
+  constructor(private favoritosService: FavoritosService, public detailsService: DetailsService) {
     this.favoritos = favoritosService.favoritos;
    }
-
-  favoritar(obj: any):void{
-    this.favoritosService.favoritar(obj);
-  }
-
-  desfavoritar(obj:any):void{
-    this.favoritosService.desfavoritar(obj);
-  }
 
   ngOnInit(): void {
   }
