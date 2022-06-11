@@ -9,7 +9,6 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ListaImgComponent } from './lista-img/lista-img.component';
 import { FavoritosComponent } from './favoritos/favoritos.component';
-import { ContactoComponent } from './contacto/contacto.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -29,7 +28,6 @@ const routes: Routes=[
     HomeComponent,
     ListaImgComponent,
     FavoritosComponent,
-    ContactoComponent,
     DetailsComponent
   ],
   imports: [
